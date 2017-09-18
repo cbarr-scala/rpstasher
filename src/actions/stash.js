@@ -1,6 +1,10 @@
 export const actionTypes = {
   DEPOSIT: 'STASH_DEPOSIT',
-  WITHDRAWAL: 'STASH_WITHDRAWAL'
+  WITHDRAWAL: 'STASH_WITHDRAWAL',
+  CHANGE_PLATINUM_TRANSACTION_VALUE: 'CHANGE_PLATINUM_TRANSACTION_VALUE',
+  CHANGE_GOLD_TRANSACTION_VALUE: 'CHANGE_GOLD_TRANSACTION_VALUE',
+  CHANGE_SILVER_TRANSACTION_VALUE: 'CHANGE_SILVER_TRANSACTION_VALUE',
+  CHANGE_COPPER_TRANSACTION_VALUE: 'CHANGE_COPPER_TRANSACTION_VALUE'
 };
 
 export const deposit = (platinumPieces, goldPieces, silverPieces, copperPieces) => ({
@@ -17,4 +21,24 @@ export const withdrawal = (platinumPieces, goldPieces, silverPieces, copperPiece
   goldPieces,
   silverPieces,
   copperPieces
+});
+
+export const changePlatinumTransactionValue = (value) => ({
+  type: actionTypes.CHANGE_PLATINUM_TRANSACTION_VALUE,
+  value
+});
+
+export const changeGoldTransactionValue = (value) => ({
+  type: actionTypes.CHANGE_GOLD_TRANSACTION_VALUE,
+  value
+});
+
+export const changeSilverTransactionValue = (value) => ({
+  type: actionTypes.CHANGE_SILVER_TRANSACTION_VALUE,
+  value
+});
+
+export const changeCopperTransactionValue = (value) => ({
+  type: actionTypes.CHANGE_COPPER_TRANSACTION_VALUE,
+  value
 });

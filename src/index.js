@@ -4,10 +4,13 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import stashReducer from './reducers/stashReducer';
+import stash from './reducers/stash';
 import App from './components/App';
 
-const store = createStore(stashReducer);
+const store = createStore(stash, /* preloadedState, */
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+
 
 ReactDOM.render(
   <Provider store={store}>
