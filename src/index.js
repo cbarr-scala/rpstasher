@@ -7,10 +7,10 @@ import { createStore } from 'redux';
 import stash from './reducers/stash';
 import App from './components/App';
 
+/* eslint-disable no-underscore-dangle */
 const store = createStore(stash, /* preloadedState, */
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-
-
+/* eslint-enable */
 
 ReactDOM.render(
   <Provider store={store}>

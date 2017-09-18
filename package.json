@@ -30,7 +30,7 @@
   "scripts": {
     "build": "webpack",
     "lint": "eslint src",
-    "serve": "webpack && webpack-dev-server --open"
+    "start": "webpack && webpack-dev-server --open"
   },
   "dependencies": {
     "react": "^15.6.1",
