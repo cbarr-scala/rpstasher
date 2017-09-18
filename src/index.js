@@ -2,20 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
-import stash from './reducers/stash';
+import stashReducer from './reducers/stashReducer';
 import App from './components/App';
 
-const store = createStore(stash, {
-  name: 'Rovan',
-  platinum: 1,
-  gold: 3,
-  silver: 34,
-  copper: 432
+const rootReducer = combineReducers({
+  stash: stashReducer,
+  form: formReducer
 });
 
-console.log(store.getState());
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>
