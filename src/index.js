@@ -2,18 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { createStore } from 'redux';
 
 import stashReducer from './reducers/stashReducer';
 import App from './components/App';
 
-const rootReducer = combineReducers({
-  stash: stashReducer,
-  form: formReducer
-});
-
-const store = createStore(rootReducer);
+const store = createStore(stashReducer);
 
 ReactDOM.render(
   <Provider store={store}>

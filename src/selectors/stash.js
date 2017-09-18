@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 
-const getPlatinumSelector = state => state.stash.platinumPieces;
-const getGoldSelector = state => state.stash.goldPieces;
-const getSilverSelector = state => state.stash.silverPieces;
-const getCopperSelector = state => state.stash.copperPieces;
+const getPlatinumSelector = state => state.platinumPieces;
+const getGoldSelector = state => state.goldPieces;
+const getSilverSelector = state => state.silverPieces;
+const getCopperSelector = state => state.copperPieces;
 
 export const getTotalCopper = createSelector(
   [getPlatinumSelector, getGoldSelector, getSilverSelector, getCopperSelector],

@@ -1,20 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
+import { deposit, withdrawal } from '../actions/stash';
 import { getTotalCopper } from '../selectors/stash';
 
 const mapStateToProps = state => {
   return {
-    initialValues: state.stash,
-    name: state.stash.name,
-    platinumPieces: state.stash.platinumPieces,
-    goldPieces: state.stash.goldPieces,
-    silverPieces: state.stash.silverPieces,
-    copperPieces: state.stash.copperPieces,
+    name: state.name,
+    platinumPieces: state.platinumPieces,
+    goldPieces: state.goldPieces,
+    silverPieces: state.silverPieces,
+    copperPieces: state.copperPieces,
     totalCopper: getTotalCopper(state)
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleWithdrawal: () => { dispatch(withdrawal(2, 3, 4, 5)); },
+    handleDeposit: () => { dispatch(deposit(2, 3, 4, 5)); }
   };
 };
 
@@ -34,46 +40,56 @@ class StashForm extends React.Component {
       goldPieces,
       silverPieces,
       copperPieces,
-      totalCopper
+      totalCopper,
+      handleWithdrawal,
+      handleDeposit
     } = this.props;
 
     return (
       <form>
         <table>
-          <thead />
+          <thead>
+            <tr>
+              <th />
+              <th>Amount</th>
+              <th />
+              <th>{name}&apos;s Stash</th>
+            </tr>
+          </thead>
           <tbody>
             <tr>
-              <td colSpan="2">Stash for: {name}</td>
+              <td rowSpan="4">
+                <button type="button" onClick={handleWithdrawal}>Withdrawal</button>
+              </td>
+              <td><input type="text" name="platinumTransactionCount" /></td>
+              <td rowSpan="4">
+                <button type="button" onClick={handleDeposit}>Deposit</button><br />
+              </td>
+              <td>Platinum: {platinumPieces}</td>
             </tr>
             <tr>
-              <td><label htmlFor="platinumPieces">Platinum</label></td>
-              <td><Field name="platinumPieces" component="input" type="text" /></td>
+              <td><input type="text" name="goldTransactionCount" /></td>
+              <td>Gold: {goldPieces}</td>
             </tr>
             <tr>
-              <td><label htmlFor="goldPieces">Gold</label></td>
-              <td><Field name="goldPieces" component="input" type="text" /></td>
+              <td><input type="text" name="silverTransactionCount" /></td>
+              <td>Silver: {silverPieces}</td>
             </tr>
             <tr>
-              <td><label htmlFor="silverPieces">Silver</label></td>
-              <td><Field name="silverPieces" component="input" type="text" /></td>
-            </tr>
-            <tr>
-              <td><label htmlFor="copperPieces">Copper</label></td>
-              <td><Field name="copperPieces" component="input" type="text" /></td>
-            </tr>
-            <tr>
-              <td>Total in Copper: </td>
-              <td>{totalCopper}</td>
+              <td><input type="text" name="copperTransactionCount" /></td>
+              <td>Copper: {copperPieces}</td>
             </tr>
           </tbody>
+          <tfoot>
+            <tr>
+              <td>Total Worth: </td>
+              <td>{totalCopper}</td>
+            </tr>
+          </tfoot>
         </table>
       </form>
     );
   }
 }
 
-
-
-export default connect(mapStateToProps)(reduxForm({
-  form: 'stashForm'
-})(StashForm));
+export default connect(mapStateToProps, mapDispatchToProps)(StashForm);
