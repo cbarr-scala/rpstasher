@@ -17,8 +17,8 @@ const defaultState = {
 
 const stash = (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.DEPOSIT:
-      return {
+    case actionTypes.DEPOSIT: {
+      const newState = {
         ...state,
         stash: {
           platinum: state.stash.platinum + action.transactionDetails.platinum,
@@ -33,8 +33,17 @@ const stash = (state = defaultState, action) => {
         sourceTransactionValue: ''
       };
 
-    case actionTypes.WITHDRAWAL:
-      return {
+      newState.transactions.push({
+        type: 'Deposit',
+        createdOn: new Date(),
+        transactionDetails: action.transactionDetails
+      });
+
+      return newState;
+    }
+
+    case actionTypes.WITHDRAWAL: {
+      const newState = {
         ...state,
         stash: {
           platinum: state.stash.platinum - action.transactionDetails.platinum,
@@ -48,6 +57,15 @@ const stash = (state = defaultState, action) => {
         copperTransactionValue: 0,
         sourceTransactionValue: ''
       };
+
+      newState.transactions.push({
+        type: 'Withdrawal',
+        createdOn: new Date(),
+        transactionDetails: action.transactionDetails
+      });
+
+      return newState;
+    }
 
     case actionTypes.CHANGE_SOURCE_TRANSACTION_VALUE:
       return {
