@@ -12,13 +12,10 @@ import AccountBalanceIcon from 'material-ui-icons/AccountBalance';
 import HistoryIcon from 'material-ui-icons/History';
 import AddCircleIcon from 'material-ui-icons/AddCircle';
 import RemoveCircleIcon from 'material-ui-icons/RemoveCircle';
+import MonetizationOnIcon from 'material-ui-icons/MonetizationOn';
 
-import StashForm from '../components/StashForm';
-
-// account_balance
-// history
-// add_circle
-// remove_circle
+import StashOverview from './StashOverview';
+import StashForm from './StashForm';
 
 export default class App extends React.Component {
   state = {
@@ -41,14 +38,17 @@ export default class App extends React.Component {
               onChange={this.handleChange}
               fullWidth
               indicatorColor="accent"
-              textColor="accent">
+              textColor="accent"
+            >
               <Tab component={Link} to="/" icon={<AccountBalanceIcon />} label="Stash" />
+              <Tab component={Link} to="/worth" icon={<MonetizationOnIcon />} label="Buying Power" />
               <Tab component={Link} to="/deposit" icon={<AddCircleIcon />} label="Deposit" />
               <Tab component={Link} to="/withdrawal" icon={<RemoveCircleIcon />} label="Withdrawal" />
-              <Tab component={Link} to="/history" icon={<HistoryIcon />} label="History" />
+              <Tab component={Link} to="/activity" icon={<HistoryIcon />} label="Activity" />
             </Tabs>
 
-            <Route exact path="/" component={StashForm} />
+            <Route exact path="/" component={StashOverview} />
+            <Route exact path="/worth" component={StashForm} />
             <Route exact path="/deposit" component={StashForm} />
             <Route exact path="/withdrawal" component={StashForm} />
             <Route exact path="/history" component={StashForm} />

@@ -2,10 +2,10 @@ import { actionTypes } from '../actions/stash';
 
 const defaultState = {
   stash: {
-    platinum: 1,
-    gold: 1,
-    silver: 1,
-    copper: 1,
+    platinum: 3,
+    gold: 642,
+    silver: 431,
+    copper: 5345,
   },
   transactions: [],
   platinumTransactionValue: 0,
