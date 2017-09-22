@@ -8,6 +8,7 @@ const defaultState = {
     copper: 5345,
   },
   transactions: [],
+  sourceTransactionValue: '',
   platinumTransactionValue: 0,
   goldTransactionValue: 0,
   silverTransactionValue: 0,
@@ -20,22 +21,38 @@ const stash = (state = defaultState, action) => {
       return {
         ...state,
         stash: {
-          platinum: state.stash.platinum + action.amount.platinum,
-          gold: state.stash.gold + action.amount.gold,
-          silver: state.stash.silver + action.amount.silver,
-          copper: state.stash.copper + action.amount.copper,
-        }
+          platinum: state.stash.platinum + action.transactionDetails.platinum,
+          gold: state.stash.gold + action.transactionDetails.gold,
+          silver: state.stash.silver + action.transactionDetails.silver,
+          copper: state.stash.copper + action.transactionDetails.copper,
+        },
+        platinumTransactionValue: 0,
+        goldTransactionValue: 0,
+        silverTransactionValue: 0,
+        copperTransactionValue: 0,
+        sourceTransactionValue: ''
       };
 
     case actionTypes.WITHDRAWAL:
       return {
         ...state,
         stash: {
-          platinum: state.stash.platinum - action.amount.platinum,
-          gold: state.stash.gold - action.amount.gold,
-          silver: state.stash.silver - action.amount.silver,
-          copper: state.stash.copper - action.amount.copper,
-        }
+          platinum: state.stash.platinum - action.transactionDetails.platinum,
+          gold: state.stash.gold - action.transactionDetails.gold,
+          silver: state.stash.silver - action.transactionDetails.silver,
+          copper: state.stash.copper - action.transactionDetails.copper,
+        },
+        platinumTransactionValue: 0,
+        goldTransactionValue: 0,
+        silverTransactionValue: 0,
+        copperTransactionValue: 0,
+        sourceTransactionValue: ''
+      };
+
+    case actionTypes.CHANGE_SOURCE_TRANSACTION_VALUE:
+      return {
+        ...state,
+        sourceTransactionValue: action.value
       };
 
     case actionTypes.CHANGE_PLATINUM_TRANSACTION_VALUE:

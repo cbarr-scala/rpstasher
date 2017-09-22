@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 
 import {
-  deposit,
+  withdrawal,
   changeSourceTransactionValue,
   changePlatinumTransactionValue,
   changeGoldTransactionValue,
@@ -33,7 +33,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleDeposit: (source, platinum, gold, silver, copper) => {
+    handleWithdrawal: (source, platinum, gold, silver, copper) => {
       const transactionDetails = {
         source,
         platinum,
@@ -42,7 +42,7 @@ const mapDispatchToProps = (dispatch) => {
         copper
       };
 
-      dispatch(deposit(transactionDetails));
+      dispatch(withdrawal(transactionDetails));
     },
     handleSourceTransactionValueChange: (transactionValue) => {
       dispatch(changeSourceTransactionValue(transactionValue, 10));
@@ -73,7 +73,7 @@ class StashDepositForm extends React.Component {
       silverTransactionValue,
       copperTransactionValue,
 
-      handleDeposit,
+      handleWithdrawal,
       handleSourceTransactionValueChange,
       handlePlatinumTransactionValueChange,
       handleGoldTransactionValueChange,
@@ -86,10 +86,10 @@ class StashDepositForm extends React.Component {
       <div className="root">
         <form noValidate autoComplete="off">
 
-          <h3>Deposit some loot into your stash below</h3>
+          <h3>Withdrawal some loot from your stash below</h3>
           <TextField
             id="source"
-            label="Source"
+            label="Reason"
             className={classes.textField}
             value={sourceTransactionValue}
             onChange={(e) => { handleSourceTransactionValueChange(e.target.value); }}
@@ -132,8 +132,8 @@ class StashDepositForm extends React.Component {
             margin="normal"
           />
           <br />
-          <Button color="primary" className={classes.button} onClick={() => handleDeposit(sourceTransactionValue, platinumTransactionValue, goldTransactionValue, silverTransactionValue, copperTransactionValue)}>
-            Deposit
+          <Button color="primary" className={classes.button} onClick={() => handleWithdrawal(sourceTransactionValue, platinumTransactionValue, goldTransactionValue, silverTransactionValue, copperTransactionValue)}>
+            Withdrawal
           </Button>
         </form>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import Divider from 'material-ui/Divider';
 import { amber, grey, blueGrey, brown } from 'material-ui/colors';
 
 import { withStyles } from 'material-ui/styles';
@@ -46,28 +46,26 @@ class StashOverview extends React.Component {
 
     return (
       <div className={classes.root}>
+        <h3>Your character&apos;s on-hand loot amounts.</h3>
         <List>
-          <ListSubheader>
-            Your character&apos;s on-hand monetary amounts.
-          </ListSubheader>
           <ListItem>
             <ListItemIcon><Avatar className={classes.platinumAvatar}>P</Avatar></ListItemIcon>
             <ListItemText secondary="Platinum" />
             <ListItemSecondaryAction><p>{platinum}</p></ListItemSecondaryAction>
           </ListItem>
-
+          <Divider light />
           <ListItem>
             <ListItemIcon><Avatar className={classes.goldAvatar}>G</Avatar></ListItemIcon>
             <ListItemText secondary="Gold" />
             <ListItemSecondaryAction><p>{gold}</p></ListItemSecondaryAction>
           </ListItem>
-
+          <Divider light />
           <ListItem>
             <ListItemIcon><Avatar className={classes.silverAvatar}>S</Avatar></ListItemIcon>
             <ListItemText secondary="Silver" />
             <ListItemSecondaryAction><p>{silver}</p></ListItemSecondaryAction>
           </ListItem>
-
+          <Divider light />
           <ListItem>
             <ListItemIcon><Avatar className={classes.copperAvatar}>C</Avatar></ListItemIcon>
             <ListItemText secondary="Copper" />
