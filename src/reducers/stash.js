@@ -1,11 +1,13 @@
 import { actionTypes } from '../actions/stash';
 
 const defaultState = {
-  name: 'Rovan',
-  platinumPieces: 1,
-  goldPieces: 1,
-  silverPieces: 1,
-  copperPieces: 1,
+  stash: {
+    platinum: 1,
+    gold: 1,
+    silver: 1,
+    copper: 1,
+  },
+  transactions: [],
   platinumTransactionValue: 0,
   goldTransactionValue: 0,
   silverTransactionValue: 0,
@@ -17,27 +19,23 @@ const stash = (state = defaultState, action) => {
     case actionTypes.DEPOSIT:
       return {
         ...state,
-        platinumPieces: state.platinumPieces + action.platinumPieces,
-        goldPieces: state.goldPieces + action.goldPieces,
-        silverPieces: state.silverPieces + action.silverPieces,
-        copperPieces: state.copperPieces + action.copperPieces,
-        platinumTransactionValue: 0,
-        goldTransactionValue: 0,
-        silverTransactionValue: 0,
-        copperTransactionValue: 0,
+        stash: {
+          platinum: state.stash.platinum + action.amount.platinum,
+          gold: state.stash.gold + action.amount.gold,
+          silver: state.stash.silver + action.amount.silver,
+          copper: state.stash.copper + action.amount.copper,
+        }
       };
 
     case actionTypes.WITHDRAWAL:
       return {
         ...state,
-        platinumPieces: state.platinumPieces - action.platinumPieces,
-        goldPieces: state.goldPieces - action.goldPieces,
-        silverPieces: state.silverPieces - action.silverPieces,
-        copperPieces: state.copperPieces - action.copperPieces,
-        platinumTransactionValue: 0,
-        goldTransactionValue: 0,
-        silverTransactionValue: 0,
-        copperTransactionValue: 0
+        stash: {
+          platinum: state.stash.platinum - action.amount.platinum,
+          gold: state.stash.gold - action.amount.gold,
+          silver: state.stash.silver - action.amount.silver,
+          copper: state.stash.copper - action.amount.copper,
+        }
       };
 
     case actionTypes.CHANGE_PLATINUM_TRANSACTION_VALUE:

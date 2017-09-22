@@ -16,11 +16,10 @@ import { getTotalCopper } from '../selectors/stash';
 
 const mapStateToProps = state => {
   return {
-    name: state.name,
-    platinumPieces: state.platinumPieces,
-    goldPieces: state.goldPieces,
-    silverPieces: state.silverPieces,
-    copperPieces: state.copperPieces,
+    platinum: state.stash.platinum,
+    gold: state.stash.gold,
+    silver: state.stash.silver,
+    copper: state.stash.copper,
     platinumTransactionValue: state.platinumTransactionValue,
     goldTransactionValue: state.goldTransactionValue,
     silverTransactionValue: state.silverTransactionValue,
@@ -33,10 +32,24 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleWithdrawal: (platinum, gold, silver, copper) => {
-      dispatch(withdrawal(platinum, gold, silver, copper));
+      const amount = { 
+        platinum, 
+        gold, 
+        silver,
+        copper
+      };
+
+      dispatch(withdrawal(amount));
     },
     handleDeposit: (platinum, gold, silver, copper) => {
-      dispatch(deposit(platinum, gold, silver, copper));
+      const amount = { 
+        platinum, 
+        gold, 
+        silver,
+        copper
+      };
+
+      dispatch(deposit(amount));
     },
     handlePlatinumTransactionValueChange: (transactionValue) => {
       dispatch(changePlatinumTransactionValue(parseInt(transactionValue, 10)));
@@ -54,32 +67,19 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class StashForm extends React.Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    platinumPieces: PropTypes.number.isRequired,
-    goldPieces: PropTypes.number.isRequired,
-    silverPieces: PropTypes.number.isRequired,
-    copperPieces: PropTypes.number.isRequired,
-    platinumTransactionValue: PropTypes.number.isRequired,
-    goldTransactionValue: PropTypes.number.isRequired,
-    silverTransactionValue: PropTypes.number.isRequired,
-    copperTransactionValue: PropTypes.number.isRequired,
-  };
 
   render() {
     const {
-      name,
-      platinumPieces,
-      goldPieces,
-      silverPieces,
+      platinum,
+      gold,
+      silver,
+      copper,
+      totalCopper,
 
       platinumTransactionValue,
       goldTransactionValue,
       silverTransactionValue,
       copperTransactionValue,
-
-      copperPieces,
-      totalCopper,
 
       handleWithdrawal,
       handleDeposit,
@@ -97,7 +97,6 @@ class StashForm extends React.Component {
               <th />
               <th>Amount</th>
               <th />
-              <th>{name}&apos;s Stash</th>
             </tr>
           </thead>
           <tbody>
@@ -115,7 +114,7 @@ class StashForm extends React.Component {
               <td rowSpan="4">
                 <button type="button" onClick={() => handleDeposit(platinumTransactionValue, goldTransactionValue, silverTransactionValue, copperTransactionValue)}>Deposit</button><br />
               </td>
-              <td>Platinum: {platinumPieces}</td>
+              <td>Platinum: {platinum}</td>
             </tr>
             <tr>
               <td>
@@ -125,7 +124,7 @@ class StashForm extends React.Component {
                   onChange={(e) => { handleGoldTransactionValueChange(e.target.value); }}
                 />
               </td>
-              <td>Gold: {goldPieces}</td>
+              <td>Gold: {gold}</td>
             </tr>
             <tr>
               <td>
@@ -135,7 +134,7 @@ class StashForm extends React.Component {
                   onChange={(e) => { handleSilverTransactionValueChange(e.target.value); }}
                 />
               </td>
-              <td>Silver: {silverPieces}</td>
+              <td>Silver: {silver}</td>
             </tr>
             <tr>
               <td>
@@ -145,7 +144,7 @@ class StashForm extends React.Component {
                   onChange={(e) => { handleCopperTransactionValueChange(e.target.value); }}
                 />
               </td>
-              <td>Copper: {copperPieces}</td>
+              <td>Copper: {copper}</td>
             </tr>
           </tbody>
           <tfoot>
