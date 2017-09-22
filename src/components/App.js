@@ -11,10 +11,12 @@ import Tabs, { Tab } from 'material-ui/Tabs';
 import AccountBalanceIcon from 'material-ui-icons/AccountBalance';
 import AddCircleIcon from 'material-ui-icons/AddCircle';
 import RemoveCircleIcon from 'material-ui-icons/RemoveCircle';
+import HistoryIcon from 'material-ui-icons/History';
 
 import StashOverview from './StashOverview';
 import StashDepositForm from './StashDepositForm';
 import StashWithdrawalForm from './StashWithdrawalForm';
+import StashHistoryList from './StashHistoryList';
 
 export default class App extends React.Component {
   state = {
@@ -42,11 +44,13 @@ export default class App extends React.Component {
               <Tab component={Link} to="/" icon={<AccountBalanceIcon />} label="Stash" />
               <Tab component={Link} to="/deposit" icon={<AddCircleIcon />} label="Deposit" />
               <Tab component={Link} to="/withdrawal" icon={<RemoveCircleIcon />} label="Withdrawal" />
+              <Tab component={Link} to="/history" icon={<HistoryIcon />} label="Activity" />
             </Tabs>
 
             <Route exact path="/" component={StashOverview} />
             <Route exact path="/deposit" component={StashDepositForm} />
             <Route exact path="/withdrawal" component={StashWithdrawalForm} />
+            <Route exact path="/history" component={StashHistoryList} />
           </Paper>
         </Router>
       </div>

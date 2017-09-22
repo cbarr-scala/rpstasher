@@ -8,8 +8,8 @@ import List, {
   ListItem,
   ListItemText,
   ListItemIcon,
-  ListItemSecondaryAction, 
-  ListSubheader } from 'material-ui/List';
+  ListItemSecondaryAction
+} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 
 const styles = theme => ({
@@ -28,11 +28,6 @@ const mapStateToProps = state => {
     copper: state.stash.copper
   };
 };
-
-// amber a400 - gold
-// platinum 200 - grey
-// silver 100 - blueGrey
-// copper 400 - brown
 
 class StashOverview extends React.Component {
   render() {

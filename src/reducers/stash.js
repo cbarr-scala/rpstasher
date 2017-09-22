@@ -7,7 +7,37 @@ const defaultState = {
     silver: 431,
     copper: 5345,
   },
-  transactions: [],
+  transactions: [{
+    type: 'Deposit',
+    createdOn: new Date(),
+    transactionDetails: {
+      source: 'Young Dragon Slaying',
+      platinum: 1,
+      gold: 3,
+      silver: 0,
+      copper: 0
+    }
+  }, {
+    type: 'Deposit',
+    createdOn: new Date(),
+    transactionDetails: {
+      source: 'Goblin Massacre',
+      platinum: 0,
+      gold: 0,
+      silver: 10,
+      copper: 645
+    }
+  }, {
+    type: 'Withdrawal',
+    createdOn: new Date(),
+    transactionDetails: {
+      source: 'Potion of Giant Strength',
+      platinum: 0,
+      gold: 1,
+      silver: 0,
+      copper: 0
+    }
+  }],
   sourceTransactionValue: '',
   platinumTransactionValue: 0,
   goldTransactionValue: 0,
