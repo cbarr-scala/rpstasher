@@ -1,43 +1,106 @@
 import { actionTypes } from '../actions/stash';
 
 const defaultState = {
-  name: 'Rovan',
-  platinumPieces: 1,
-  goldPieces: 1,
-  silverPieces: 1,
-  copperPieces: 1,
-  platinumTransactionValue: 0,
-  goldTransactionValue: 0,
-  silverTransactionValue: 0,
-  copperTransactionValue: 0
+  stash: {
+    platinum: 3,
+    gold: 642,
+    silver: 431,
+    copper: 5345,
+  },
+  transactions: [{
+    type: 'Deposit',
+    createdOn: new Date(),
+    transactionDetails: {
+      source: 'Young Dragon Slaying',
+      platinum: 1,
+      gold: 3,
+      silver: 0,
+      copper: 0
+    }
+  }, {
+    type: 'Deposit',
+    createdOn: new Date(),
+    transactionDetails: {
+      source: 'Goblin Massacre',
+      platinum: 0,
+      gold: 0,
+      silver: 10,
+      copper: 6453
+    }
+  }, {
+    type: 'Withdrawal',
+    createdOn: new Date(),
+    transactionDetails: {
+      source: 'Potion of Giant Strength',
+      platinum: 0,
+      gold: 1,
+      silver: 0,
+      copper: 0
+    }
+  }],
+  sourceTransactionValue: '',
+  platinumTransactionValue: '',
+  goldTransactionValue: '',
+  silverTransactionValue: '',
+  copperTransactionValue: ''
 };
 
 const stash = (state = defaultState, action) => {
   switch (action.type) {
-    case actionTypes.DEPOSIT:
-      return {
+    case actionTypes.DEPOSIT: {
+      const newState = {
         ...state,
-        platinumPieces: state.platinumPieces + action.platinumPieces,
-        goldPieces: state.goldPieces + action.goldPieces,
-        silverPieces: state.silverPieces + action.silverPieces,
-        copperPieces: state.copperPieces + action.copperPieces,
-        platinumTransactionValue: 0,
-        goldTransactionValue: 0,
-        silverTransactionValue: 0,
-        copperTransactionValue: 0,
+        stash: {
+          platinum: state.stash.platinum + action.transactionDetails.platinum,
+          gold: state.stash.gold + action.transactionDetails.gold,
+          silver: state.stash.silver + action.transactionDetails.silver,
+          copper: state.stash.copper + action.transactionDetails.copper,
+        },
+        platinumTransactionValue: '',
+        goldTransactionValue: '',
+        silverTransactionValue: '',
+        copperTransactionValue: '',
+        sourceTransactionValue: ''
       };
 
-    case actionTypes.WITHDRAWAL:
+      newState.transactions.push({
+        type: 'Deposit',
+        createdOn: new Date(),
+        transactionDetails: action.transactionDetails
+      });
+
+      return newState;
+    }
+
+    case actionTypes.WITHDRAWAL: {
+      const newState = {
+        ...state,
+        stash: {
+          platinum: state.stash.platinum - action.transactionDetails.platinum,
+          gold: state.stash.gold - action.transactionDetails.gold,
+          silver: state.stash.silver - action.transactionDetails.silver,
+          copper: state.stash.copper - action.transactionDetails.copper,
+        },
+        platinumTransactionValue: '',
+        goldTransactionValue: '',
+        silverTransactionValue: '',
+        copperTransactionValue: '',
+        sourceTransactionValue: ''
+      };
+
+      newState.transactions.push({
+        type: 'Withdrawal',
+        createdOn: new Date(),
+        transactionDetails: action.transactionDetails
+      });
+
+      return newState;
+    }
+
+    case actionTypes.CHANGE_SOURCE_TRANSACTION_VALUE:
       return {
         ...state,
-        platinumPieces: state.platinumPieces - action.platinumPieces,
-        goldPieces: state.goldPieces - action.goldPieces,
-        silverPieces: state.silverPieces - action.silverPieces,
-        copperPieces: state.copperPieces - action.copperPieces,
-        platinumTransactionValue: 0,
-        goldTransactionValue: 0,
-        silverTransactionValue: 0,
-        copperTransactionValue: 0
+        sourceTransactionValue: action.value
       };
 
     case actionTypes.CHANGE_PLATINUM_TRANSACTION_VALUE:
