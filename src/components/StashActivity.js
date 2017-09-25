@@ -16,8 +16,8 @@ import Table, {
   TableRow
 } from 'material-ui/Table';
 
-const styles = theme => ({
-  withdrawalTransaction: { color: red[200], verticalAlign: 'bottom'},
+const styles = ({
+  withdrawalTransaction: { color: red[200], verticalAlign: 'bottom' },
   depositTransaction: { color: green[200], verticalAlign: 'bottom' }
 });
 
@@ -27,7 +27,7 @@ const mapStateToProps = state => {
   };
 };
 
-class StashOverview extends React.Component {
+class StashActivity extends React.Component {
   render() {
     const {
       transactions,
@@ -37,7 +37,7 @@ class StashOverview extends React.Component {
     return (
 
       <div className={classes.root}>
-        <h3>Your character&apos;s transaction log.</h3>
+        <h3>Your character&apos;s activity log</h3>
 
         <Table>
           <TableHead>
@@ -53,19 +53,17 @@ class StashOverview extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {transactions.reverse().map((x, index) => {
-              return (
-                <TableRow key={index} hover={true}>
-                  <TableCell>{x.type === 'Deposit' ? <AddCircleIcon className={classes.depositTransaction} /> : <RemoveCircleIcon className={classes.withdrawalTransaction} />} {x.type}</TableCell>
-                  <TableCell>{moment(x.createdOn).calendar()}</TableCell>
-                  <TableCell>{x.transactionDetails.source}</TableCell>
-                  <TableCell numeric>{numeral(x.transactionDetails.platinum).format('0,0')}</TableCell>
-                  <TableCell numeric>{numeral(x.transactionDetails.gold).format('0,0')}</TableCell>
-                  <TableCell numeric>{numeral(x.transactionDetails.silver).format('0,0')}</TableCell>
-                  <TableCell numeric>{numeral(x.transactionDetails.copper).format('0,0')}</TableCell>
-                </TableRow>
-              );
-            })}
+            {transactions.reverse().map((x, index) => (
+              <TableRow key={index} hover>
+                <TableCell>{x.type === 'Deposit' ? <AddCircleIcon className={classes.depositTransaction} /> : <RemoveCircleIcon className={classes.withdrawalTransaction} />} {x.type}</TableCell>
+                <TableCell>{moment(x.createdOn).calendar()}</TableCell>
+                <TableCell>{x.transactionDetails.source}</TableCell>
+                <TableCell numeric>{numeral(x.transactionDetails.platinum).format('0,0')}</TableCell>
+                <TableCell numeric>{numeral(x.transactionDetails.gold).format('0,0')}</TableCell>
+                <TableCell numeric>{numeral(x.transactionDetails.silver).format('0,0')}</TableCell>
+                <TableCell numeric>{numeral(x.transactionDetails.copper).format('0,0')}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
 
@@ -74,4 +72,4 @@ class StashOverview extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(StashOverview));
+export default connect(mapStateToProps)(withStyles(styles)(StashActivity));

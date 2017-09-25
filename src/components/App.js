@@ -44,7 +44,7 @@ export default class App extends React.Component {
               <Tab component={Link} to="/" icon={<AccountBalanceIcon />} label="Stash" />
               <Tab component={Link} to="/deposit" icon={<AddCircleIcon />} label="Deposit" />
               <Tab component={Link} to="/withdrawal" icon={<RemoveCircleIcon />} label="Withdrawal" />
-              <Tab component={Link} to="/history" icon={<HistoryIcon />} label="Activity" />
+              <Tab component={Link} to="/activity" icon={<HistoryIcon />} label="Activity" />
             </Tabs>
 
             <Route exact path="/" component={StashOverview} />

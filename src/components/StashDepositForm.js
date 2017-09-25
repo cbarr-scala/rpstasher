@@ -15,10 +15,7 @@ import {
 } from '../actions/stash';
 
 const styles = theme => ({
-  textField: {
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2
-  },
+  textField: { marginLeft: theme.spacing.unit * 2, marginRight: theme.spacing.unit * 2 },
 });
 
 const mapStateToProps = state => {

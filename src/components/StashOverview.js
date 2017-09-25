@@ -5,21 +5,24 @@ import numeral from 'numeraljs';
 import { amber, grey, blueGrey, brown } from 'material-ui/colors';
 
 import { withStyles } from 'material-ui/styles';
-import List, {
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  ListItemSecondaryAction
-} from 'material-ui/List';
+import Table, {
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow
+} from 'material-ui/Table';
 import Avatar from 'material-ui/Avatar';
 
-const styles = theme => ({
-  platinumAvatar: { color: '#000', backgroundColor: grey[200], border: '1px solid #ddd', height: 25, width: 25, fontSize: '0.9em' },
-  goldAvatar: { color: '#000', backgroundColor: amber[400], border: '1px solid #ddd', height: 25, width: 25, fontSize: '0.9em' },
-  silverAvatar: { color: '#000', backgroundColor: blueGrey[100], border: '1px solid #ddd', height: 25, width: 25, fontSize: '0.9em' },
-  copperAvatar: { color: '#000', backgroundColor: brown[400], border: '1px solid #ddd', height: 25, width: 25, fontSize: '0.9em' },
-  root: { background: theme.palette.background.paper }
-});
+const styles = () => {
+  const avatar = { color: '#000', border: '1px solid', height: 25, width: 25, fontSize: '0.9em', verticalAlign: 'middle', display: 'inline-flex' };
+
+  return {
+    platinumAvatar: { ...avatar, backgroundColor: grey[200], borderColor: grey[500] },
+    goldAvatar: { ...avatar, backgroundColor: amber[400], borderColor: amber[500] },
+    silverAvatar: { ...avatar, backgroundColor: blueGrey[100], borderColor: blueGrey[500] },
+    copperAvatar: { ...avatar, backgroundColor: brown[400], borderColor: brown[500], color: '#fff' }
+  };
+};
 
 const mapStateToProps = state => {
   return {
@@ -41,33 +44,34 @@ class StashOverview extends React.Component {
     } = this.props;
 
     return (
-      <div className={classes.root}>
+      <div>
         <h3>Your character&apos;s on-hand loot amounts.</h3>
-        <List>
-          <ListItem>
-            <ListItemIcon><Avatar className={classes.platinumAvatar}>P</Avatar></ListItemIcon>
-            <ListItemText secondary="Platinum" />
-            <ListItemSecondaryAction><p>{numeral(platinum).format('0,0')}</p></ListItemSecondaryAction>
-          </ListItem>
-          <Divider light />
-          <ListItem>
-            <ListItemIcon><Avatar className={classes.goldAvatar}>G</Avatar></ListItemIcon>
-            <ListItemText secondary="Gold" />
-            <ListItemSecondaryAction><p>{numeral(gold).format('0,0')}</p></ListItemSecondaryAction>
-          </ListItem>
-          <Divider light />
-          <ListItem>
-            <ListItemIcon><Avatar className={classes.silverAvatar}>S</Avatar></ListItemIcon>
-            <ListItemText secondary="Silver" />
-            <ListItemSecondaryAction><p>{numeral(silver).format('0,0')}</p></ListItemSecondaryAction>
-          </ListItem>
-          <Divider light />
-          <ListItem>
-            <ListItemIcon><Avatar className={classes.copperAvatar}>C</Avatar></ListItemIcon>
-            <ListItemText secondary="Copper" />
-            <ListItemSecondaryAction primary="teset"><p>{numeral(copper).format('0,0')}</p></ListItemSecondaryAction>
-          </ListItem>
-        </List>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Type</TableCell>
+              <TableCell numeric>Amount</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell><Avatar className={classes.platinumAvatar}>P</Avatar> Platinum</TableCell>
+              <TableCell numeric>{numeral(platinum).format('0,0')}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell><Avatar className={classes.goldAvatar}>G</Avatar> Gold</TableCell>
+              <TableCell numeric>{numeral(gold).format('0,0')}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell><Avatar className={classes.silverAvatar}>S</Avatar> Silver</TableCell>
+              <TableCell numeric>{numeral(silver).format('0,0')}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell><Avatar className={classes.copperAvatar}>C</Avatar> Copper</TableCell>
+              <TableCell numeric>{numeral(copper).format('0,0')}</TableCell>
+            </TableRow>                        
+          </TableBody>
+        </Table>
       </div>
     );
   }
