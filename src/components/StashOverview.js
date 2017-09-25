@@ -14,10 +14,10 @@ import List, {
 import Avatar from 'material-ui/Avatar';
 
 const styles = theme => ({
-  platinumAvatar: { color: '#000', backgroundColor: grey[200], border: '1px solid #ddd' },
-  goldAvatar: { color: '#000', backgroundColor: amber[400], border: '1px solid #ddd' },
-  silverAvatar: { color: '#000', backgroundColor: blueGrey[100], border: '1px solid #ddd'},
-  copperAvatar: { color: '#000', backgroundColor: brown[400], border: '1px solid #ddd' },
+  platinumAvatar: { color: '#000', backgroundColor: grey[200], border: '1px solid #ddd', height: 25, width: 25, fontSize: '0.9em' },
+  goldAvatar: { color: '#000', backgroundColor: amber[400], border: '1px solid #ddd', height: 25, width: 25, fontSize: '0.9em' },
+  silverAvatar: { color: '#000', backgroundColor: blueGrey[100], border: '1px solid #ddd', height: 25, width: 25, fontSize: '0.9em' },
+  copperAvatar: { color: '#000', backgroundColor: brown[400], border: '1px solid #ddd', height: 25, width: 25, fontSize: '0.9em' },
   root: { background: theme.palette.background.paper }
 });
 
