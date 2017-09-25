@@ -1,5 +1,4 @@
 import React from 'react';
-import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 
 import { connect } from 'react-redux';
@@ -13,6 +12,8 @@ import {
   changeSilverTransactionValue,
   changeCopperTransactionValue
 } from '../actions/stash';
+
+import StashTransactionValueInput from './shared/StashTransactionValueInput';
 
 const styles = theme => ({
   textField: { marginLeft: theme.spacing.unit * 2, marginRight: theme.spacing.unit * 2 },
@@ -78,50 +79,13 @@ const StashDepositForm = ({
   <form noValidate autoComplete="off">
 
     <h3>Withdrawal some loot from your stash below</h3>
-    <TextField
-      id="source"
-      label="Reason"
-      className={classes.textField}
-      value={sourceTransactionValue}
-      onChange={(e) => { handleSourceTransactionValueChange(e.target.value); }}
-      margin="normal"
-    />
-    <br />
-    <TextField
-      id="platinum"
-      label="Platinum"
-      className={classes.textField}
-      value={platinumTransactionValue}
-      onChange={(e) => { handlePlatinumTransactionValueChange(e.target.value); }}
-      margin="normal"
-    />
-    <br />
-    <TextField
-      id="gold"
-      label="Gold"
-      className={classes.textField}
-      value={goldTransactionValue}
-      onChange={(e) => { handleGoldTransactionValueChange(e.target.value); }}
-      margin="normal"
-    />
-    <br />
-    <TextField
-      id="silver"
-      label="Silver"
-      className={classes.textField}
-      value={silverTransactionValue}
-      onChange={(e) => { handleSilverTransactionValueChange(e.target.value); }}
-      margin="normal"
-    />
-    <br />
-    <TextField
-      id="copper"
-      label="Copper"
-      className={classes.textField}
-      value={copperTransactionValue}
-      onChange={(e) => { handleCopperTransactionValueChange(e.target.value); }}
-      margin="normal"
-    />
+
+    <StashTransactionValueInput value={sourceTransactionValue} label="Source" className={classes.textField} onChangeHandler={handleSourceTransactionValueChange} />
+    <StashTransactionValueInput value={platinumTransactionValue} label="Platinum" className={classes.textField} onChangeHandler={handlePlatinumTransactionValueChange} />
+    <StashTransactionValueInput value={goldTransactionValue} label="Gold" className={classes.textField} onChangeHandler={handleGoldTransactionValueChange} />
+    <StashTransactionValueInput value={silverTransactionValue} label="Silver" className={classes.textField} onChangeHandler={handleSilverTransactionValueChange} />
+    <StashTransactionValueInput value={copperTransactionValue} label="Copper" className={classes.textField} onChangeHandler={handleCopperTransactionValueChange} />
+
     <br />
     <Button
       color="primary"

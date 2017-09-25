@@ -1,6 +1,5 @@
 import React from 'react';
 import moment from 'moment';
-import numeral from 'numeraljs';
 
 import AddCircleIcon from 'material-ui-icons/AddCircle';
 import RemoveCircleIcon from 'material-ui-icons/RemoveCircle';
@@ -15,6 +14,8 @@ import Table, {
   TableHead,
   TableRow
 } from 'material-ui/Table';
+
+import { withStashCurrency } from './shared/formatting';
 
 const styles = ({
   withdrawalTransaction: { color: red[200], verticalAlign: 'bottom' },
@@ -50,10 +51,10 @@ const StashActivity = ({transactions, classes}) => (
             <TableCell>{x.type === 'Deposit' ? <AddCircleIcon className={classes.depositTransaction} /> : <RemoveCircleIcon className={classes.withdrawalTransaction} />} {x.type}</TableCell>
             <TableCell>{moment(x.createdOn).calendar()}</TableCell>
             <TableCell>{x.transactionDetails.source}</TableCell>
-            <TableCell numeric>{numeral(x.transactionDetails.platinum).format('0,0')}</TableCell>
-            <TableCell numeric>{numeral(x.transactionDetails.gold).format('0,0')}</TableCell>
-            <TableCell numeric>{numeral(x.transactionDetails.silver).format('0,0')}</TableCell>
-            <TableCell numeric>{numeral(x.transactionDetails.copper).format('0,0')}</TableCell>
+            <TableCell numeric>{withStashCurrency(x.transactionDetails.platinum)}</TableCell>
+            <TableCell numeric>{withStashCurrency(x.transactionDetails.gold)}</TableCell>
+            <TableCell numeric>{withStashCurrency(x.transactionDetails.silver)}</TableCell>
+            <TableCell numeric>{withStashCurrency(x.transactionDetails.copper)}</TableCell>
           </TableRow>
         ))}
       </TableBody>

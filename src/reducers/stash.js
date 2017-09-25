@@ -39,10 +39,10 @@ const defaultState = {
     }
   }],
   sourceTransactionValue: '',
-  platinumTransactionValue: 0,
-  goldTransactionValue: 0,
-  silverTransactionValue: 0,
-  copperTransactionValue: 0
+  platinumTransactionValue: '',
+  goldTransactionValue: '',
+  silverTransactionValue: '',
+  copperTransactionValue: ''
 };
 
 const stash = (state = defaultState, action) => {
@@ -56,10 +56,10 @@ const stash = (state = defaultState, action) => {
           silver: state.stash.silver + action.transactionDetails.silver,
           copper: state.stash.copper + action.transactionDetails.copper,
         },
-        platinumTransactionValue: 0,
-        goldTransactionValue: 0,
-        silverTransactionValue: 0,
-        copperTransactionValue: 0,
+        platinumTransactionValue: '',
+        goldTransactionValue: '',
+        silverTransactionValue: '',
+        copperTransactionValue: '',
         sourceTransactionValue: ''
       };
 
@@ -81,10 +81,10 @@ const stash = (state = defaultState, action) => {
           silver: state.stash.silver - action.transactionDetails.silver,
           copper: state.stash.copper - action.transactionDetails.copper,
         },
-        platinumTransactionValue: 0,
-        goldTransactionValue: 0,
-        silverTransactionValue: 0,
-        copperTransactionValue: 0,
+        platinumTransactionValue: '',
+        goldTransactionValue: '',
+        silverTransactionValue: '',
+        copperTransactionValue: '',
         sourceTransactionValue: ''
       };
 

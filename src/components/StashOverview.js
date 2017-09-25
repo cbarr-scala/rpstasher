@@ -1,12 +1,14 @@
 import React from 'react';
-import numeral from 'numeraljs';
 
 import { connect } from 'react-redux';
 
 import Avatar from 'material-ui/Avatar';
 import { amber, grey, blueGrey, brown } from 'material-ui/colors';
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Table, { TableBody, TableCell, TableHead, TableRow, TableFooter } from 'material-ui/Table';
 import { withStyles } from 'material-ui/styles';
+
+import { getCopperTotal } from '../selectors/stash';
+import { withStashCurrency } from './shared/formatting';
 
 const styles = () => {
   const avatar = { color: '#000', border: '1px solid', height: 25, width: 25, fontSize: '0.9em', verticalAlign: 'middle', display: 'inline-flex' };
@@ -24,20 +26,19 @@ const mapStateToProps = state => {
     platinum: state.stash.platinum,
     gold: state.stash.gold,
     silver: state.stash.silver,
-    copper: state.stash.copper
+    copper: state.stash.copper,
+    totalInCopper: getCopperTotal(state)
   };
 };
 
-function CurrencyOverviewRow(props) {
-  return (
-    <TableRow>
-      <TableCell><Avatar className={props.avatarClassName}>{props.displayName.charAt(0)}</Avatar> {props.displayName}</TableCell>
-      <TableCell numeric>{numeral(props.amount).format('0,0')}</TableCell>
-    </TableRow>
-  );
-}
+const CurrencyOverviewRow = ({avatarClassName, displayName, amount}) => (
+  <TableRow hover>
+    <TableCell><Avatar className={avatarClassName}>{displayName.charAt(0)}</Avatar> {displayName}</TableCell>
+    <TableCell numeric>{withStashCurrency(amount)}</TableCell>
+  </TableRow>
+);
 
-const StashOverview = ({ platinum, gold, silver, copper, classes }) => {
+const StashOverview = ({ platinum, gold, silver, copper, totalInCopper, classes }) => {
   return (
     <div>
       <h3>Your character&apos;s on-hand loot amounts.</h3>
@@ -53,6 +54,12 @@ const StashOverview = ({ platinum, gold, silver, copper, classes }) => {
           <CurrencyOverviewRow avatarClassName={classes.goldAvatar} displayName="Gold" amount={gold} />
           <CurrencyOverviewRow avatarClassName={classes.silverAvatar} displayName="Silver" amount={silver} />
           <CurrencyOverviewRow avatarClassName={classes.copperAvatar} displayName="Copper" amount={copper} />
+
+          <TableRow>
+            <TableCell colSpan="2" numeric>
+              Total in Copper: {withStashCurrency(totalInCopper)}
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </div>
