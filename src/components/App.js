@@ -16,7 +16,7 @@ import HistoryIcon from 'material-ui-icons/History';
 import StashOverview from './StashOverview';
 import StashDepositForm from './StashDepositForm';
 import StashWithdrawalForm from './StashWithdrawalForm';
-import StashHistoryList from './StashHistoryList';
+import StashActivity from './StashActivity';
 
 export default class App extends React.Component {
   state = {
@@ -50,7 +50,7 @@ export default class App extends React.Component {
             <Route exact path="/" component={StashOverview} />
             <Route exact path="/deposit" component={StashDepositForm} />
             <Route exact path="/withdrawal" component={StashWithdrawalForm} />
-            <Route exact path="/history" component={StashHistoryList} />
+            <Route exact path="/activity" component={StashActivity} />
           </Paper>
         </Router>
       </div>
