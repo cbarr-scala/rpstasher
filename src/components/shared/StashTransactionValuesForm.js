@@ -11,9 +11,9 @@ import {
   changeGoldTransactionValue,
   changeSilverTransactionValue,
   changeCopperTransactionValue
-} from '../actions/stash';
+} from '../../actions/stash';
 
-import StashTransactionValueInput from './shared/StashTransactionValueInput';
+import StashTransactionValueInput from './StashTransactionValueInput';
 
 const styles = ({
   root: { padding: 15 },
@@ -61,7 +61,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const StashDepositForm = ({
+const StashTransactionValuesForm = ({
   classes,
 
   sourceTransactionValue,
@@ -75,7 +75,9 @@ const StashDepositForm = ({
   handlePlatinumTransactionValueChange,
   handleGoldTransactionValueChange,
   handleSilverTransactionValueChange,
-  handleCopperTransactionValueChange
+  handleCopperTransactionValueChange,
+
+  actionButtonDisplayName
 }) => (
   <form noValidate autoComplete="off" className={classes.root}>
 
@@ -86,17 +88,15 @@ const StashDepositForm = ({
     <StashTransactionValueInput value={goldTransactionValue} label="Gold" className={classes.textField} onChangeHandler={handleGoldTransactionValueChange} />
     <StashTransactionValueInput value={silverTransactionValue} label="Silver" className={classes.textField} onChangeHandler={handleSilverTransactionValueChange} />
     <StashTransactionValueInput value={copperTransactionValue} label="Copper" className={classes.textField} onChangeHandler={handleCopperTransactionValueChange} />
-
-    <br />
     <Button
       raised
       color="primary"
       className={classes.button}
       onClick={() => { handleWithdrawal(sourceTransactionValue, platinumTransactionValue, goldTransactionValue, silverTransactionValue, copperTransactionValue); }}
     >
-      Withdrawal
+      {actionButtonDisplayName}
     </Button>
   </form>
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(StashDepositForm));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(StashTransactionValuesForm));

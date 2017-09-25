@@ -58,6 +58,7 @@ const StashActivity = ({transactions, classes}) => (
           </TableRow>
         ))}
       </TableBody>
+
     </Table>
   </div>
 );

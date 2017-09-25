@@ -12,21 +12,3 @@ export const getCopperTotal = createSelector(
     return (platinum * 1000) + (gold * 100) + (silver * 10) + (copper);
   }
 );
-
-export const getWithdrawalTotal = createSelector(
-  [getTransactions],
-  (transactions) => {
-    return transactions.reduce((total, transaction) => { 
-      return (transaction.type === 'Withdrawal') ? transaction.amount : 0
-    });
-  }
-);
-
-export const getDepositTotal = createSelector(
-  [getTransactions],
-  (transactions) => {
-    return transactions.reduce((total, transaction) => { 
-      return (transaction.type === 'Deposit') ? transaction.amount : 0
-    });
-  }
-);

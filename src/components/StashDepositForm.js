@@ -3,6 +3,8 @@ import Button from 'material-ui/Button';
 
 import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
+
+import StashTransactionValueInput from './shared/StashTransactionValueInput';
 import {
   deposit,
   changeSourceTransactionValue,
@@ -12,10 +14,9 @@ import {
   changeCopperTransactionValue
 } from '../actions/stash';
 
-import StashTransactionValueInput from './shared/StashTransactionValueInput';
-
-const styles = theme => ({
-  textField: { marginLeft: theme.spacing.unit * 2, marginRight: theme.spacing.unit * 2 },
+const styles = ({
+  button: { display: 'block' },
+  root: { padding: 15 }
 });
 
 const mapStateToProps = state => {
@@ -76,7 +77,7 @@ const StashDepositForm = ({
   handleCopperTransactionValueChange
 }) => (
 
-  <form noValidate autoComplete="off">
+  <form noValidate autoComplete="off" className={classes.root}>
 
     <h3>Deposit some loot into your stash below</h3>
 
@@ -85,9 +86,12 @@ const StashDepositForm = ({
     <StashTransactionValueInput value={goldTransactionValue} label="Gold" className={classes.textField} onChangeHandler={handleGoldTransactionValueChange} />
     <StashTransactionValueInput value={silverTransactionValue} label="Silver" className={classes.textField} onChangeHandler={handleSilverTransactionValueChange} />
     <StashTransactionValueInput value={copperTransactionValue} label="Copper" className={classes.textField} onChangeHandler={handleCopperTransactionValueChange} />
-
-    <br />
-    <Button color="primary" className={classes.button} onClick={() => handleDeposit(sourceTransactionValue, platinumTransactionValue, goldTransactionValue, silverTransactionValue, copperTransactionValue)}>
+    <Button
+      raised 
+      color="primary"
+      className={classes.button}
+      onClick={() => handleDeposit(sourceTransactionValue, platinumTransactionValue, goldTransactionValue, silverTransactionValue, copperTransactionValue)}
+    >
       Deposit
     </Button>
   </form>
