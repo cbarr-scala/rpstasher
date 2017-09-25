@@ -1,9 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
+import numeral from 'numeraljs';
 
-import { amber, grey, blueGrey, brown } from 'material-ui/colors';
+import AddCircleIcon from 'material-ui-icons/AddCircle';
+import RemoveCircleIcon from 'material-ui-icons/RemoveCircle';
 
 import { withStyles } from 'material-ui/styles';
+import { red, green } from 'material-ui/colors';
 
 import Table, {
   TableBody,
@@ -12,14 +16,9 @@ import Table, {
   TableRow
 } from 'material-ui/Table';
 
-import Avatar from 'material-ui/Avatar';
-
 const styles = theme => ({
-  platinumAvatar: { color: '#000', backgroundColor: grey[200], border: '1px solid #ddd' },
-  goldAvatar: { color: '#000', backgroundColor: amber[400], border: '1px solid #ddd' },
-  silverAvatar: { color: '#000', backgroundColor: blueGrey[100], border: '1px solid #ddd' },
-  copperAvatar: { color: '#000', backgroundColor: brown[400], border: '1px solid #ddd' },
-  root: { background: theme.palette.background.paper }
+  withdrawalTransaction: { color: red[200], verticalAlign: 'bottom'},
+  depositTransaction: { color: green[200], verticalAlign: 'bottom' }
 });
 
 const mapStateToProps = state => {
@@ -35,8 +34,6 @@ class StashOverview extends React.Component {
       classes
     } = this.props;
 
-    const formatDate = (x) => x.toString();
-
     return (
 
       <div className={classes.root}>
@@ -49,23 +46,23 @@ class StashOverview extends React.Component {
               <TableCell>Date</TableCell>
               <TableCell>Description</TableCell>
 
-              <TableCell numeric><Avatar className={classes.platinumAvatar}>P</Avatar></TableCell>
-              <TableCell numeric><Avatar className={classes.goldAvatar}>G</Avatar></TableCell>
-              <TableCell className={classes.right} numeric><Avatar className={classes.silverAvatar}>S</Avatar></TableCell>
-              <TableCell numeric><Avatar className={classes.copperAvatar}>C</Avatar></TableCell>
+              <TableCell numeric>Platinum</TableCell>
+              <TableCell numeric>Gold</TableCell>
+              <TableCell numeric>Silver</TableCell>
+              <TableCell numeric>Copper</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {transactions.reverse().map((x, index) => {
               return (
-                <TableRow key={index}>
-                  <TableCell>{x.type}</TableCell>
-                  <TableCell>{formatDate(x.createdOn)}</TableCell>
+                <TableRow key={index} hover={true}>
+                  <TableCell>{x.type === 'Deposit' ? <AddCircleIcon className={classes.depositTransaction} /> : <RemoveCircleIcon className={classes.withdrawalTransaction} />} {x.type}</TableCell>
+                  <TableCell>{moment(x.createdOn).calendar()}</TableCell>
                   <TableCell>{x.transactionDetails.source}</TableCell>
-                  <TableCell numeric>{x.transactionDetails.platinum}</TableCell>
-                  <TableCell numeric>{x.transactionDetails.gold}</TableCell>
-                  <TableCell numeric>{x.transactionDetails.silver}</TableCell>
-                  <TableCell numeric>{x.transactionDetails.copper}</TableCell>
+                  <TableCell numeric>{numeral(x.transactionDetails.platinum).format('0,0')}</TableCell>
+                  <TableCell numeric>{numeral(x.transactionDetails.gold).format('0,0')}</TableCell>
+                  <TableCell numeric>{numeral(x.transactionDetails.silver).format('0,0')}</TableCell>
+                  <TableCell numeric>{numeral(x.transactionDetails.copper).format('0,0')}</TableCell>
                 </TableRow>
               );
             })}

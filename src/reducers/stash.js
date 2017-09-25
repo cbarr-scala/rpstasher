@@ -25,7 +25,7 @@ const defaultState = {
       platinum: 0,
       gold: 0,
       silver: 10,
-      copper: 645
+      copper: 6453
     }
   }, {
     type: 'Withdrawal',

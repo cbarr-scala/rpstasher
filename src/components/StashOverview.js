@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Divider from 'material-ui/Divider';
+import numeral from 'numeraljs';
 import { amber, grey, blueGrey, brown } from 'material-ui/colors';
 
 import { withStyles } from 'material-ui/styles';
@@ -46,25 +47,25 @@ class StashOverview extends React.Component {
           <ListItem>
             <ListItemIcon><Avatar className={classes.platinumAvatar}>P</Avatar></ListItemIcon>
             <ListItemText secondary="Platinum" />
-            <ListItemSecondaryAction><p>{platinum}</p></ListItemSecondaryAction>
+            <ListItemSecondaryAction><p>{numeral(platinum).format('0,0')}</p></ListItemSecondaryAction>
           </ListItem>
           <Divider light />
           <ListItem>
             <ListItemIcon><Avatar className={classes.goldAvatar}>G</Avatar></ListItemIcon>
             <ListItemText secondary="Gold" />
-            <ListItemSecondaryAction><p>{gold}</p></ListItemSecondaryAction>
+            <ListItemSecondaryAction><p>{numeral(gold).format('0,0')}</p></ListItemSecondaryAction>
           </ListItem>
           <Divider light />
           <ListItem>
             <ListItemIcon><Avatar className={classes.silverAvatar}>S</Avatar></ListItemIcon>
             <ListItemText secondary="Silver" />
-            <ListItemSecondaryAction><p>{silver}</p></ListItemSecondaryAction>
+            <ListItemSecondaryAction><p>{numeral(silver).format('0,0')}</p></ListItemSecondaryAction>
           </ListItem>
           <Divider light />
           <ListItem>
             <ListItemIcon><Avatar className={classes.copperAvatar}>C</Avatar></ListItemIcon>
             <ListItemText secondary="Copper" />
-            <ListItemSecondaryAction primary="teset"><p>{copper}</p></ListItemSecondaryAction>
+            <ListItemSecondaryAction primary="teset"><p>{numeral(copper).format('0,0')}</p></ListItemSecondaryAction>
           </ListItem>
         </List>
       </div>
