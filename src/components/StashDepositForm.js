@@ -1,10 +1,9 @@
 import React from 'react';
-
-import { connect } from 'react-redux';
-import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 
+import { connect } from 'react-redux';
+import { withStyles } from 'material-ui/styles';
 import {
   deposit,
   changeSourceTransactionValue,
@@ -59,83 +58,75 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-class StashDepositForm extends React.Component {
-  render() {
-    const {
-      classes,
+const StashDepositForm = ({
+  classes,
 
-      sourceTransactionValue,
-      platinumTransactionValue,
-      goldTransactionValue,
-      silverTransactionValue,
-      copperTransactionValue,
+  sourceTransactionValue,
+  platinumTransactionValue,
+  goldTransactionValue,
+  silverTransactionValue,
+  copperTransactionValue,
 
-      handleDeposit,
-      handleSourceTransactionValueChange,
-      handlePlatinumTransactionValueChange,
-      handleGoldTransactionValueChange,
-      handleSilverTransactionValueChange,
-      handleCopperTransactionValueChange
-    } = this.props;
+  handleDeposit,
+  handleSourceTransactionValueChange,
+  handlePlatinumTransactionValueChange,
+  handleGoldTransactionValueChange,
+  handleSilverTransactionValueChange,
+  handleCopperTransactionValueChange
+}) => (
 
-    return (
+  <form noValidate autoComplete="off">
 
-      <div className="root">
-        <form noValidate autoComplete="off">
-
-          <h3>Deposit some loot into your stash below</h3>
-          <TextField
-            id="source"
-            label="Source"
-            className={classes.textField}
-            value={sourceTransactionValue}
-            onChange={(e) => { handleSourceTransactionValueChange(e.target.value); }}
-            margin="normal"
-          />
-          <br />
-          <TextField
-            id="platinum"
-            label="Platinum"
-            className={classes.textField}
-            value={platinumTransactionValue}
-            onChange={(e) => { handlePlatinumTransactionValueChange(e.target.value); }}
-            margin="normal"
-          />
-          <br />
-          <TextField
-            id="gold"
-            label="Gold"
-            className={classes.textField}
-            value={goldTransactionValue}
-            onChange={(e) => { handleGoldTransactionValueChange(e.target.value); }}
-            margin="normal"
-          />
-          <br />
-          <TextField
-            id="silver"
-            label="Silver"
-            className={classes.textField}
-            value={silverTransactionValue}
-            onChange={(e) => { handleSilverTransactionValueChange(e.target.value); }}
-            margin="normal"
-          />
-          <br />
-          <TextField
-            id="copper"
-            label="Copper"
-            className={classes.textField}
-            value={copperTransactionValue}
-            onChange={(e) => { handleCopperTransactionValueChange(e.target.value); }}
-            margin="normal"
-          />
-          <br />
-          <Button color="primary" className={classes.button} onClick={() => handleDeposit(sourceTransactionValue, platinumTransactionValue, goldTransactionValue, silverTransactionValue, copperTransactionValue)}>
-            Deposit
-          </Button>
-        </form>
-      </div>
-    );
-  }
-}
+    <h3>Deposit some loot into your stash below</h3>
+    <TextField
+      id="source"
+      label="Source"
+      className={classes.textField}
+      value={sourceTransactionValue}
+      onChange={(e) => { handleSourceTransactionValueChange(e.target.value); }}
+      margin="normal"
+    />
+    <br />
+    <TextField
+      id="platinum"
+      label="Platinum"
+      className={classes.textField}
+      value={platinumTransactionValue}
+      onChange={(e) => { handlePlatinumTransactionValueChange(e.target.value); }}
+      margin="normal"
+    />
+    <br />
+    <TextField
+      id="gold"
+      label="Gold"
+      className={classes.textField}
+      value={goldTransactionValue}
+      onChange={(e) => { handleGoldTransactionValueChange(e.target.value); }}
+      margin="normal"
+    />
+    <br />
+    <TextField
+      id="silver"
+      label="Silver"
+      className={classes.textField}
+      value={silverTransactionValue}
+      onChange={(e) => { handleSilverTransactionValueChange(e.target.value); }}
+      margin="normal"
+    />
+    <br />
+    <TextField
+      id="copper"
+      label="Copper"
+      className={classes.textField}
+      value={copperTransactionValue}
+      onChange={(e) => { handleCopperTransactionValueChange(e.target.value); }}
+      margin="normal"
+    />
+    <br />
+    <Button color="primary" className={classes.button} onClick={() => handleDeposit(sourceTransactionValue, platinumTransactionValue, goldTransactionValue, silverTransactionValue, copperTransactionValue)}>
+      Deposit
+    </Button>
+  </form>
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(StashDepositForm));

@@ -1,17 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import Divider from 'material-ui/Divider';
 import numeral from 'numeraljs';
-import { amber, grey, blueGrey, brown } from 'material-ui/colors';
 
-import { withStyles } from 'material-ui/styles';
-import Table, {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow
-} from 'material-ui/Table';
+import { connect } from 'react-redux';
+
 import Avatar from 'material-ui/Avatar';
+import { amber, grey, blueGrey, brown } from 'material-ui/colors';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import { withStyles } from 'material-ui/styles';
 
 const styles = () => {
   const avatar = { color: '#000', border: '1px solid', height: 25, width: 25, fontSize: '0.9em', verticalAlign: 'middle', display: 'inline-flex' };
@@ -33,48 +28,35 @@ const mapStateToProps = state => {
   };
 };
 
-class StashOverview extends React.Component {
-  render() {
-    const {
-      platinum,
-      gold,
-      silver,
-      copper,
-      classes
-    } = this.props;
-
-    return (
-      <div>
-        <h3>Your character&apos;s on-hand loot amounts.</h3>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Type</TableCell>
-              <TableCell numeric>Amount</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell><Avatar className={classes.platinumAvatar}>P</Avatar> Platinum</TableCell>
-              <TableCell numeric>{numeral(platinum).format('0,0')}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell><Avatar className={classes.goldAvatar}>G</Avatar> Gold</TableCell>
-              <TableCell numeric>{numeral(gold).format('0,0')}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell><Avatar className={classes.silverAvatar}>S</Avatar> Silver</TableCell>
-              <TableCell numeric>{numeral(silver).format('0,0')}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell><Avatar className={classes.copperAvatar}>C</Avatar> Copper</TableCell>
-              <TableCell numeric>{numeral(copper).format('0,0')}</TableCell>
-            </TableRow>                        
-          </TableBody>
-        </Table>
-      </div>
-    );
-  }
+function CurrencyOverviewRow(props) {
+  return (
+    <TableRow>
+      <TableCell><Avatar className={props.avatarClassName}>{props.displayName.charAt(0)}</Avatar> {props.displayName}</TableCell>
+      <TableCell numeric>{numeral(props.amount).format('0,0')}</TableCell>
+    </TableRow>
+  );
 }
+
+const StashOverview = ({ platinum, gold, silver, copper, classes }) => {
+  return (
+    <div>
+      <h3>Your character&apos;s on-hand loot amounts.</h3>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Type</TableCell>
+            <TableCell numeric>Amount</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <CurrencyOverviewRow avatarClassName={classes.platinumAvatar} displayName="Platinum" amount={platinum} />
+          <CurrencyOverviewRow avatarClassName={classes.goldAvatar} displayName="Gold" amount={gold} />
+          <CurrencyOverviewRow avatarClassName={classes.silverAvatar} displayName="Silver" amount={silver} />
+          <CurrencyOverviewRow avatarClassName={classes.copperAvatar} displayName="Copper" amount={copper} />
+        </TableBody>
+      </Table>
+    </div>
+  );
+};
 
 export default connect(mapStateToProps)(withStyles(styles)(StashOverview));

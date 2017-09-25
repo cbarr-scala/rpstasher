@@ -1,11 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import moment from 'moment';
 import numeral from 'numeraljs';
 
 import AddCircleIcon from 'material-ui-icons/AddCircle';
 import RemoveCircleIcon from 'material-ui-icons/RemoveCircle';
 
+import { connect } from 'react-redux';
 import { withStyles } from 'material-ui/styles';
 import { red, green } from 'material-ui/colors';
 
@@ -27,49 +27,38 @@ const mapStateToProps = state => {
   };
 };
 
-class StashActivity extends React.Component {
-  render() {
-    const {
-      transactions,
-      classes
-    } = this.props;
+const StashActivity = ({transactions, classes}) => (
+  <div>
+    <h3>Your character&apos;s activity log</h3>
 
-    return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Type</TableCell>
+          <TableCell>Date</TableCell>
+          <TableCell>Description</TableCell>
 
-      <div className={classes.root}>
-        <h3>Your character&apos;s activity log</h3>
-
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Type</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>Description</TableCell>
-
-              <TableCell numeric>Platinum</TableCell>
-              <TableCell numeric>Gold</TableCell>
-              <TableCell numeric>Silver</TableCell>
-              <TableCell numeric>Copper</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {transactions.reverse().map((x, index) => (
-              <TableRow key={index} hover>
-                <TableCell>{x.type === 'Deposit' ? <AddCircleIcon className={classes.depositTransaction} /> : <RemoveCircleIcon className={classes.withdrawalTransaction} />} {x.type}</TableCell>
-                <TableCell>{moment(x.createdOn).calendar()}</TableCell>
-                <TableCell>{x.transactionDetails.source}</TableCell>
-                <TableCell numeric>{numeral(x.transactionDetails.platinum).format('0,0')}</TableCell>
-                <TableCell numeric>{numeral(x.transactionDetails.gold).format('0,0')}</TableCell>
-                <TableCell numeric>{numeral(x.transactionDetails.silver).format('0,0')}</TableCell>
-                <TableCell numeric>{numeral(x.transactionDetails.copper).format('0,0')}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-
-      </div>
-    );
-  }
-}
+          <TableCell numeric>Platinum</TableCell>
+          <TableCell numeric>Gold</TableCell>
+          <TableCell numeric>Silver</TableCell>
+          <TableCell numeric>Copper</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {transactions.reverse().map((x, index) => (
+          <TableRow key={index} hover>
+            <TableCell>{x.type === 'Deposit' ? <AddCircleIcon className={classes.depositTransaction} /> : <RemoveCircleIcon className={classes.withdrawalTransaction} />} {x.type}</TableCell>
+            <TableCell>{moment(x.createdOn).calendar()}</TableCell>
+            <TableCell>{x.transactionDetails.source}</TableCell>
+            <TableCell numeric>{numeral(x.transactionDetails.platinum).format('0,0')}</TableCell>
+            <TableCell numeric>{numeral(x.transactionDetails.gold).format('0,0')}</TableCell>
+            <TableCell numeric>{numeral(x.transactionDetails.silver).format('0,0')}</TableCell>
+            <TableCell numeric>{numeral(x.transactionDetails.copper).format('0,0')}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </div>
+);
 
 export default connect(mapStateToProps)(withStyles(styles)(StashActivity));
